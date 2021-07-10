@@ -1,4 +1,5 @@
 const socket = io();
+console.log('s');
 
 const form = document.querySelector('.send-chat');
 const container = document.querySelector('.chat-container');
