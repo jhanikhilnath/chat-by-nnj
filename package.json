@@ -4,11 +4,14 @@
   "description": "chat app made by nikhil",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "Nikhil Nath Jha",
   "license": "ISC",
   "dependencies": {
     "socket.io": "^4.1.2"
+  },
+  "engines": {
+    "node": "^10"
   }
 }
