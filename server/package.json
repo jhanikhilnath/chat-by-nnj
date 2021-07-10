@@ -1,0 +1,14 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "chat app made by nikhil",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Nikhil Nath Jha",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^4.1.2"
+  }
+}
