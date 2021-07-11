@@ -5,11 +5,14 @@ const form = document.querySelector('.send-chat');
 const container = document.querySelector('.chat-container');
 const messageCont = document.querySelector('#send-text');
 
-const append = function (message, position) {
+const append = function (message, position, out = false) {
   const newMsg = document.createElement('div');
-  newMsg.innerText = message;
+  newMsg.innerHTML = message;
   newMsg.classList.add('message');
   newMsg.classList.add(position);
+
+  if (out) newMsg.classList.add('outgoing');
+
   container.appendChild(newMsg);
   messageCont.value = '';
   scroll();
@@ -22,17 +25,21 @@ socket.emit('new-person-joined', name);
 form.addEventListener('submit', e => {
   e.preventDefault();
   const message = messageCont.value;
-  append(`You: ${message}`, 'right');
+  append(`<strong>You:</strong> ${message}`, 'right', true);
 
   socket.emit('send', { message });
 });
 
 socket.on('person-joined', name => {
-  append(`${name} joined the chat`, 'left');
+  append(`${name} joined the chat`, 'center');
+});
+
+socket.on('leave', name => {
+  append(`${name} left the chat`, 'center');
 });
 
 socket.on('recive', data => {
-  append(`${data.user}: ${data.message}`, 'left');
+  append(`<strong>${data.user}:</strong> ${data.message}`, 'left');
 });
 
 function scroll() {

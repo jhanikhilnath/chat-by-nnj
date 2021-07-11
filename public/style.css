@@ -58,7 +58,12 @@ img {
   font-size: 18px;
   border-radius: 16px;
   margin: 10px 2px;
-  width: 30%;
+  width: auto;
+  height: auto;
+}
+
+.outgoing {
+  background: rgb(200, 244, 245);
 }
 
 .left {
@@ -69,6 +74,14 @@ img {
 .right {
   float: right;
   clear: both;
+}
+
+.center {
+  text-align: center;
+  width: 210px;
+  display: block;
+  margin: auto;
+  margin-bottom: 6px;
 }
 
 .send-chat {
