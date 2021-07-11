@@ -31,11 +31,11 @@ form.addEventListener('submit', e => {
 });
 
 socket.on('person-joined', name => {
-  append(`${name} joined the chat`, 'center');
+  append(`<strong><i>${name} joined the chat</i></strong>`, 'left');
 });
 
 socket.on('leave', name => {
-  append(`${name} left the chat`, 'center');
+  append(`<strong><i>${name} left the chat</i></strong>`, 'left');
 });
 
 socket.on('recive', data => {
