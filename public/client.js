@@ -14,7 +14,6 @@ const append = function (message, position, out = false) {
   if (out) newMsg.classList.add('outgoing');
 
   container.appendChild(newMsg);
-  messageCont.value = '';
   scroll();
 };
 
@@ -28,6 +27,7 @@ form.addEventListener('submit', e => {
   append(`<strong>You:</strong> ${message}`, 'right', true);
 
   socket.emit('send', { message });
+  messageCont.value = '';
 });
 
 socket.on('person-joined', name => {
