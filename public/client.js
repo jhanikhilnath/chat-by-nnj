@@ -1,5 +1,5 @@
 const socket = io();
-console.log('s');
+console.log('Client initiated');
 
 const form = document.querySelector('.send-chat');
 const container = document.querySelector('.chat-container');
@@ -17,13 +17,35 @@ const append = function (message, position, out = false) {
   scroll();
 };
 
-const name = prompt('Enter your name to continue: ');
+function getName() {
+  let name;
+  while (true) {
+    name = prompt('Enter your name to continue: ').trim();
 
-socket.emit('new-person-joined', name);
+    if (name) {
+      break;
+    }
+  }
+  return name;
+}
+
+async function init() {
+  const name = await getName();
+  socket.emit('new-person-joined', name);
+}
+
+await init();
+
+console.log(name);
 
 form.addEventListener('submit', e => {
   e.preventDefault();
-  const message = messageCont.value;
+  const message = messageCont.value.trim();
+
+  if (!message) {
+    return;
+  }
+
   append(`<strong>You:</strong> ${message}`, 'right', true);
 
   socket.emit('send', { message });
@@ -39,7 +61,7 @@ socket.on('leave', name => {
 });
 
 socket.on('recive', data => {
-  append(`<strong>${data.user}:</strong> ${data.message}`, 'left');
+  append(`<strong>${data.user}:</strong>  ${data.message}`, 'left');
 });
 
 function scroll() {
